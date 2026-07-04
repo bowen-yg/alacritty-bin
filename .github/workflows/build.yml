@@ -8,6 +8,7 @@ jobs:
     steps:
       - name: Check code
         uses: actions/checkout@v4
+
       - name: Install dependences
         run: |
           sudo apt update
@@ -15,5 +16,17 @@ jobs:
             libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc
       - name: Install rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Install mold
+        uses: rui314/setup-mold@v1
+
       - name: Test codes
         run: cargo test --release
+      - name: Build
+        run: cargo build --release
+      - name: Upload
+        uses: actions/upload-artifact@v4
+        with:
+          name: alacritty-bin
+          path: |
+            target/release/alacritty
+            extra/
