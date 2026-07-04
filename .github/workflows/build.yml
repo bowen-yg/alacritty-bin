@@ -15,4 +15,5 @@ jobs:
             libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc
       - name: Install rust
         uses: actions-rust-lang/setup-rust-toolchain@v1
+      - name: Test codes
         run: cargo test --release
