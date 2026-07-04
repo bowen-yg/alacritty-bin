@@ -1,0 +1,18 @@
+name: Build
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    step:
+      - name: Check code
+        uses: actions/checkout@v4
+      - name: Install dependences
+        run: |
+          sudo apt update
+          sudo apt install cmake pkg-config libfreetype6-dev libfontconfig1-dev \
+            libxcb-xfixes0-dev libxkbcommon-dev python3 scdoc
+      - name: Install rust
+        uses: actions-rust-lang/setup-rust-toolchain@v1
+        run: cargo test --release
